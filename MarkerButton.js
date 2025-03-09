@@ -40,7 +40,7 @@ class MarkerButton extends HTMLElement {
 
     _observer = new MutationObserver(() => this.updateButton());
 
-    attributeChangedcallback() {
+    attributeChangedCallback() {
         this.updateCanvas();
     }
 
