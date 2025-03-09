@@ -7,29 +7,37 @@ class MarkerButton extends HTMLElement {
         this.shadowRoot.innerHTML = 
             `
             <style>
-            :host {
-                display: inline-block;
-                position: relative;
-            }
-            button {
-                padding: 10px 20px;
-                background: #4CAF50;
-                color: white;
-                border: none;
-                cursor: pointer;
-                border-radius: 4px;
-            }
-            button.active {
-                background: #f44336;
-            }
-            canvas {
-                position: fixed;
-                top: 0;
-                left: 0;
-                pointer-events: none;
-            }
+                :host {
+                    position: relative;
+                }
+                .container {
+                    position: relative;
+                }
+                button {
+                    padding: 10px 20px;
+                    background: #4CAF50;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    position: relative;
+                    z-index: 2;
+                }
+                button.active {
+                    background: #f44336;
+                }
+                canvas {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    pointer-events: none;
+                    display : none;
+                }
             </style>
-            <button></button>
+            <div class="container">
+                <button></button>
+            </div>
             `;
         this.isMarking = false;
         this.canvas = null;
@@ -44,15 +52,16 @@ class MarkerButton extends HTMLElement {
         this.updateCanvas();
     }
 
+    
     connectedCallback() {
         this._observer.observe(this,{
             childList: true,
             subtree: true,
             characterData: true
         })
-        this.updateCanvas();
         this.updateButton();
         this.addButtonListener();
+        this.updateCanvas();
     }
 
     disconnectedCallback() {
@@ -76,8 +85,9 @@ class MarkerButton extends HTMLElement {
 
         this.canvas.width = width;
         this.canvas.height = height;
+        this.canvas.style.border = '1px solid black';
 
-        document.body.appendChild(this.canvas);
+        this.shadowRoot.appendChild(this.canvas);
 
         this.ctx = this.canvas.getContext('2d');
         this.ctx.lineWidth = parseInt(lineWidth);
@@ -90,6 +100,7 @@ class MarkerButton extends HTMLElement {
             this.isMarking = !this.isMarking;
             button.classList.toggle('active', this.isMarking);
             button.textContent = this.isMarking ? '点击禁用标记' : '点击启用标记';
+            this.canvas.style.display = this.isMarking? 'block' : 'none';
             this.toggleMarking();
         });
     }
