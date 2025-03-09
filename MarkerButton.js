@@ -64,12 +64,15 @@ class MarkerButton extends HTMLElement {
     }
 
     updateCanvas() {
-        this.canvas = document.createElement('canvas');
+        if(this.canvas && this.canvas.parentNode) {
+            this.canvas.parentNode.removeChild(this.canvas);
+        }
 
+        this.canvas = document.createElement('canvas');
         const width = parseInt(this.getAttribute('width')) || window.innerWidth;
         const height = parseInt(this.getAttribute('height')) || window.innerHeight;
-        const colorStyle = this.gacetAttribute('color') || "#66ccff";
-        const lineWidth = parseInt(this.getAttribute('linewidth')) || 0.5;
+        const colorStyle = this.getAttribute('color') || "#66ccff";
+        const lineWidth = parseFloat(this.getAttribute('linewidth')) || 0.5;
 
         this.canvas.width = width;
         this.canvas.height = height;
