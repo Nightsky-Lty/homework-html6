@@ -1,5 +1,6 @@
 class CopyTag extends HTMLElement
 {
+    static get observedAttributes() {return ['color'];}
     constructor()
     {
         super();
@@ -52,6 +53,16 @@ class CopyTag extends HTMLElement
     disconnectedCallback()
     {
         this._observer.disconnect();
+    }
+
+    attributeChangedCallback()
+    {
+        this.updateAttribute();
+    }
+
+    updateAttribute()
+    {
+        this.contentP.style.color = this.getAttribute('color') || "#2c3e50";
     }
 
     updateContent()
