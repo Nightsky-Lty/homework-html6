@@ -71,17 +71,24 @@ class ShapeText extends HTMLElement
       {
         triangle: size,
         circle: size,
-        rectangle: `${parseInt(size) * 1.5}px`
+        rectangle: size
+      };
+
+      const heightMap = 
+      {
+        triangle: size,
+        circle: size,
+        rectangle: `${parseInt(size) * 0.5}`
       };
       
       this.shapeDiv.style.cssText = `
         width: ${widthMap[type] || size}px;
-        height: ${size}px;
+        height: ${heightMap[type] || size}px;
         background: ${color};
         ${this.getShapeStyle(type, size)}
       `;
   
-      const fontSize = parseInt(size) * 0.2;
+      const fontSize = parseInt(size) * 0.1;
       this.textSpan.style.fontSize = `${fontSize}px`;
     }
   
