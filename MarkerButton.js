@@ -1,4 +1,5 @@
-class MarkerButton extends HTMLElement {
+class MarkerButton extends HTMLElement 
+{
     static get observedAttributes() { return ['color', 'height', 'width', 'linewidth']; }
 
     constructor() {
@@ -48,12 +49,14 @@ class MarkerButton extends HTMLElement {
 
     _observer = new MutationObserver(() => this.updateButton());
 
-    attributeChangedCallback() {
+    attributeChangedCallback() 
+    {
         this.updateCanvas();
     }
 
     
-    connectedCallback() {
+    connectedCallback() 
+    {
         this._observer.observe(this,{
             childList: true,
             subtree: true,
@@ -64,15 +67,18 @@ class MarkerButton extends HTMLElement {
         this.updateCanvas();
     }
 
-    disconnectedCallback() {
+    disconnectedCallback() 
+    {
         this._observer.disconnect();
     }
 
-    updateButton() {
+    updateButton() 
+    {
         this.button.textContent = this.textContent;
     }
 
-    updateCanvas() {
+    updateCanvas() 
+    {
         if(this.canvas && this.canvas.parentNode) {
             this.canvas.parentNode.removeChild(this.canvas);
         }
@@ -94,7 +100,8 @@ class MarkerButton extends HTMLElement {
         this.ctx.strokeStyle = colorStyle;
     }
 
-    addButtonListener() {
+    addButtonListener() 
+    {
         const button = this.shadowRoot.querySelector('button');
         button.addEventListener('click', () => {
             this.isMarking = !this.isMarking;
@@ -105,12 +112,16 @@ class MarkerButton extends HTMLElement {
         });
     }
 
-    toggleMarking() {
-        if (this.isMarking) {
+    toggleMarking() 
+    {
+        if (this.isMarking) 
+        {
             document.addEventListener('mousedown', this.startDrawing);
             document.addEventListener('mousemove', this.draw);
             document.addEventListener('mouseup', this.stopDrawing);
-        } else {
+        } 
+        else 
+        {
             document.removeEventListener('mousedown', this.startDrawing);
             document.removeEventListener('mousemove', this.draw);
             document.removeEventListener('mouseup', this.stopDrawing);

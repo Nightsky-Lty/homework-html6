@@ -8,4 +8,4 @@ maker-button: color width height linewidth
 
 shape-text: size shape color
 
-weather-card city
+weather-card city width height ccolor hcolor tcolor

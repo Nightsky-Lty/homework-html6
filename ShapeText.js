@@ -1,7 +1,9 @@
-class ShapeText extends HTMLElement {
+class ShapeText extends HTMLElement 
+{
     static get observedAttributes() { return ['type', 'color', 'size']; }
   
-    constructor() {
+    constructor() 
+    {
       super();
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.innerHTML = `
@@ -31,13 +33,15 @@ class ShapeText extends HTMLElement {
       this.textSpan = this.shadowRoot.querySelector('.text');
     }
   
-    attributeChangedCallback() {
+    attributeChangedCallback() 
+    {
       this.updateShape();
     }
   
     _observer = new MutationObserver(() => this.updateContent());
     
-    connectedCallback() {
+    connectedCallback() 
+    {
       this._observer.observe(this, { 
         childList: true,
         subtree: true,
@@ -47,20 +51,24 @@ class ShapeText extends HTMLElement {
       this.updateShape();
     }
   
-    disconnectedCallback() {
+    disconnectedCallback() 
+    {
       this._observer.disconnect();
     }
   
-    updateContent() {
+    updateContent() 
+    {
       this.textSpan.textContent = this.textContent.trim();
     }
   
-    updateShape() {
+    updateShape() 
+    {
       const type = this.getAttribute('type') || 'rectangle';
       const color = this.getAttribute('color') || '#3498db';
       const size = this.getAttribute('size') || '120';
   
-      const widthMap = {
+      const widthMap = 
+      {
         triangle: size,
         circle: size,
         rectangle: `${parseInt(size) * 1.5}px`
@@ -77,8 +85,10 @@ class ShapeText extends HTMLElement {
       this.textSpan.style.fontSize = `${fontSize}px`;
     }
   
-    getShapeStyle(type, size) {
-      const styles = {
+    getShapeStyle(type, size) 
+    {
+      const styles = 
+      {
         triangle: `clip-path: polygon(50% 0%, 0% 100%, 100% 100%)`,
         circle: `border-radius: 50%`,
         rectangle: `border-radius: 4px`
