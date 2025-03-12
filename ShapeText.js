@@ -33,9 +33,11 @@ class ShapeText extends HTMLElement
       this.textSpan = this.shadowRoot.querySelector('.text');
     }
   
-    attributeChangedCallback() 
+    attributeChangedCallback(name, oldValue, newValue) 
     {
-      this.updateShape();
+      if (oldValue !== newValue) {
+          this.updateShape();
+      }
     }
   
     _observer = new MutationObserver(() => this.updateContent());

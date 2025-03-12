@@ -143,9 +143,11 @@ class CopyTag extends HTMLElement
         }, 2000);
     }
 
-    attributeChangedCallback() 
+    attributeChangedCallback(name, oldValue, newValue) 
     {
-        this.updateAttribute();
+        if (oldValue !== newValue) {
+            this.updateAttribute();
+        }
     }
 
     updateAttribute() 

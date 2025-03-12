@@ -10,22 +10,65 @@
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="CopyTag.js"></script>
     <script type="text/javascript" src="WeatherTag.js"></script>
+    <script type="text/javascript" src="ProgressBar.js"></script>
+    <script type="text/javascript" src="FlipCard.js"></script>
+    <script type="text/javascript" src="ImageZoom.js"></script>
 </head>
 
 <body>
-    <div></div>
-    <marker-button height="400" width="1500" linewidth="1" color="#ff0000">MarkerButton</marker-button>
 
-    <shape-text type="triangle" color="#e74c3c" size="200">三角</shape-text>
-    <shape-text type="circle" color="#2ecc71" size="400">斗地主</shape-text>
-    <shape-text type="rectangle" color="#9b59b6" size="400">羽毛人打火柴球</shape-text>
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <progress-bar></progress-bar>
+    </div>
 
-    <weather-card width="300" height="200" tcolor="#66ccff" ccolor="#66ccff" hcolor="#66ccff">
-        WeatherCard
-    </weather-card>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
 
-    <copy-tag color="#66ccff">我是果子走咿呀咿呀哟</copy-tag>
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <marker-button height="400" width="1500" linewidth="1" color="#ff0000">MarkerButton</marker-button>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
 
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <shape-text type="triangle" color="#e74c3c" size="200">三角</shape-text>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
+    
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <shape-text type="circle" color="#2ecc71" size="400">斗地主</shape-text>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
+    
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <shape-text type="rectangle" color="#9b59b6" size="400">羽毛人打火柴球</shape-text>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
+
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <weather-card width="300" height="200" tcolor="#66ccff" ccolor="#66ccff" hcolor="#66ccff">
+            WeatherCard
+        </weather-card>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
+
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <copy-tag color="#66ccff">点击复制文案</copy-tag>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
+
+
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <flip-card style="width: 200px; height: 300px;">
+            <div slot="front">前端</div>
+            <div slot="back">后端</div>
+        </flip-card>
+    </div>
+    <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>    
+
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+        <image-zoom src="test.png">
+            <img src="test.png" alt="Zoomable Image">
+        </image-zoom>
+    </div>
 </body>
 
 </html>

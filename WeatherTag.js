@@ -37,9 +37,11 @@ class WeatherCard extends HTMLElement
         this.loadData();
     }
 
-    attributeChangedCallback()
+    attributeChangedCallback(name, oldValue, newValue)
     {
-        this.updateAttribute();
+        if (oldValue !== newValue) {
+            this.updateAttribute();
+        }
     }
 
     updateAttribute()
