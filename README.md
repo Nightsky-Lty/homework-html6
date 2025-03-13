@@ -33,6 +33,7 @@ design some labels
 - `front-color`：前面颜色
 - `back-color`：后面颜色
 - `font-size`：字体大小
+  
 **model-viewer**：
 - `width`：模型视图宽度
 - `height`：模型视图高度
