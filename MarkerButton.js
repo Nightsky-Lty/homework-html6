@@ -1,11 +1,15 @@
-class MarkerButton extends HTMLElement 
+class MarkerButton extends HTMLElement
 {
-    static get observedAttributes() { return ['color', 'height', 'width', 'linewidth']; }
+    static get observedAttributes()
+    {
+        return ['color', 'height', 'width', 'linewidth'];
+    }
 
-    constructor() {
+    constructor()
+    {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = 
+        this.shadowRoot.innerHTML =
             `
             <style>
                 :host {
@@ -49,14 +53,15 @@ class MarkerButton extends HTMLElement
 
     _observer = new MutationObserver(() => this.updateButton());
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue !== newValue) {
+    attributeChangedCallback(name, oldValue, newValue)
+    {
+        if (oldValue !== newValue)
+        {
             this.updateCanvas();
         }
     }
 
-    
-    connectedCallback() 
+    connectedCallback()
     {
         this._observer.observe(this,{
             childList: true,
@@ -68,19 +73,20 @@ class MarkerButton extends HTMLElement
         this.updateCanvas();
     }
 
-    disconnectedCallback() 
+    disconnectedCallback()
     {
         this._observer.disconnect();
     }
 
-    updateButton() 
+    updateButton()
     {
         this.button.textContent = this.textContent;
     }
 
-    updateCanvas() 
+    updateCanvas()
     {
-        if(this.canvas && this.canvas.parentNode) {
+        if(this.canvas && this.canvas.parentNode)
+        {
             this.canvas.parentNode.removeChild(this.canvas);
         }
 
@@ -101,10 +107,11 @@ class MarkerButton extends HTMLElement
         this.ctx.strokeStyle = colorStyle;
     }
 
-    addButtonListener() 
+    addButtonListener()
     {
         const button = this.shadowRoot.querySelector('button');
-        button.addEventListener('click', () => {
+        button.addEventListener('click', () =>
+        {
             this.isMarking = !this.isMarking;
             button.classList.toggle('active', this.isMarking);
             button.textContent = this.isMarking ? '点击禁用标记' : '点击启用标记';
@@ -113,15 +120,15 @@ class MarkerButton extends HTMLElement
         });
     }
 
-    toggleMarking() 
+    toggleMarking()
     {
-        if (this.isMarking) 
+        if (this.isMarking)
         {
             document.addEventListener('mousedown', this.startDrawing);
             document.addEventListener('mousemove', this.draw);
             document.addEventListener('mouseup', this.stopDrawing);
-        } 
-        else 
+        }
+        else
         {
             document.removeEventListener('mousedown', this.startDrawing);
             document.removeEventListener('mousemove', this.draw);
@@ -131,25 +138,29 @@ class MarkerButton extends HTMLElement
         }
     }
 
-    startDrawing = (e) => {
+    startDrawing = (e) =>
+    {
         const rect = this.canvas.getBoundingClientRect();
         this.isMouseDown = true;
         this.ctx.beginPath();
         this.ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
     };
 
-    draw = (e) => {
+    draw = (e) =>
+    {
         if (!this.isMarking || !this.isMouseDown) return;
         const rect = this.canvas.getBoundingClientRect();
         this.ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
         this.ctx.stroke();
     };
 
-    stopDrawing = () => {
+    stopDrawing = () =>
+    {
         this.isMouseDown = false;
     };
 
-    clearCanvas = () => {
+    clearCanvas = () =>
+    {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }

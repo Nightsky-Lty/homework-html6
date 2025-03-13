@@ -1,4 +1,10 @@
-class FlipCard extends HTMLElement {
+class FlipCard extends HTMLElement 
+{
+    static get observedAttributes() 
+    {
+        return ['front-color', 'back-color', 'font-size', 'width', 'height'];
+    }
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -28,16 +34,16 @@ class FlipCard extends HTMLElement {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: 24px;
+                    font-size: var(--font-size, 24px);
                     color: white;
                     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                     border-radius: 10px;
                 }
                 .flip-card-front {
-                    background-color: #2980b9;
+                    background-color: var(--front-color, #2980b9);
                 }
                 .flip-card-back {
-                    background-color: #e74c3c;
+                    background-color: var(--back-color, #e74c3c);
                     transform: rotateY(180deg);
                 }
                 :host([flipped]) .flip-card {
@@ -55,15 +61,42 @@ class FlipCard extends HTMLElement {
         `;
     }
 
-    connectedCallback() {
+    connectedCallback() 
+    {
         this.addEventListener('click', this.toggleFlip);
+        this.updateStyles();
     }
 
-    disconnectedCallback() {
+    disconnectedCallback() 
+    {
         this.removeEventListener('click', this.toggleFlip);
     }
 
-    toggleFlip() {
+    attributeChangedCallback(name, oldValue, newValue) 
+    {
+        if (oldValue !== newValue) 
+        {
+            this.updateStyles();
+        }
+    }
+
+    updateStyles() 
+    {
+        const frontColor = this.getAttribute('front-color') || '#2980b9';
+        const backColor = this.getAttribute('back-color') || '#e74c3c';
+        const fontSize = this.getAttribute('font-size') || '24px';
+        const width = this.getAttribute('width') ? `${this.getAttribute('width')}px` : '200px';
+        const height = this.getAttribute('height') ? `${this.getAttribute('height')}px` : '300px';
+
+        this.style.setProperty('--front-color', frontColor);
+        this.style.setProperty('--back-color', backColor);
+        this.style.setProperty('--font-size', fontSize);
+        this.style.width = width;
+        this.style.height = height;
+    }
+
+    toggleFlip() 
+    {
         this.toggleAttribute('flipped');
     }
 }

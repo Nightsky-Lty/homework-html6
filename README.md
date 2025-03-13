@@ -27,8 +27,14 @@ design some labels
 - `color`：字体颜色
 
 **progress-bar**：
-- 没有特定属性
+- `color`：进度条颜色
 
 **flip-card**：
-- 没有特定属性
-。
+- `front-color`：前面颜色
+- `back-color`：后面颜色
+- `font-size`：字体大小
+**model-viewer**：
+- `width`：模型视图宽度
+- `height`：模型视图高度
+- `shape`：模型形状（可选值：cube, cylinder, cone）
+- `color`：模型颜色（十六进制）

@@ -1,11 +1,15 @@
 class CopyTag extends HTMLElement
 {
-    static get observedAttributes() {return ['color'];}
+    static get observedAttributes()
+    {
+        return ['color'];
+    }
+
     constructor()
     {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = 
+        this.shadowRoot.innerHTML =
             `
             <style>
                 :host {
@@ -83,7 +87,6 @@ class CopyTag extends HTMLElement
                 <p class="content"></p>
                 <div class="tooltip">已复制!</div>
             </div>
-
             `;
         this.containerDiv = this.shadowRoot.querySelector('.container');
         this.contentP = this.shadowRoot.querySelector('.content');
@@ -94,11 +97,12 @@ class CopyTag extends HTMLElement
 
     connectedCallback()
     {
-        this._observer.observe(this,{
+        this._observer.observe(this,
+        {
             childList: true,
             subtree: true,
             characterData: true
-        })
+        });
         this.updateContent();
         this.addPEventListener();
     }
@@ -115,42 +119,47 @@ class CopyTag extends HTMLElement
 
     addPEventListener()
     {
-        this.addEventListener('click',this.copyTextToClipboard);
+        this.addEventListener('click', this.copyTextToClipboard);
     }
 
-    async copyTextToClipboard() 
+    async copyTextToClipboard()
     {
-        try {
+        try
+        {
             const text = this.contentP.textContent;
             await navigator.clipboard.writeText(text);
             this.showTooltip();
             this.containerDiv.style.animation = 'bounce 0.4s ease';
-        } catch (err) {
+        }
+        catch (err)
+        {
             this.tooltip.textContent = '复制失败!';
             this.tooltip.style.background = '#e74c3c';
             this.showTooltip();
         }
     }
 
-    showTooltip() 
+    showTooltip()
     {
         this.tooltip.classList.add('show');
         clearTimeout(this.tooltipTimeout);
-        this.tooltipTimeout = setTimeout(() => {
+        this.tooltipTimeout = setTimeout(() =>
+        {
             this.tooltip.classList.remove('show');
             this.tooltip.style.background = '';
             this.tooltip.textContent = '已复制!';
         }, 2000);
     }
 
-    attributeChangedCallback(name, oldValue, newValue) 
+    attributeChangedCallback(name, oldValue, newValue)
     {
-        if (oldValue !== newValue) {
+        if (oldValue !== newValue)
+        {
             this.updateAttribute();
         }
     }
 
-    updateAttribute() 
+    updateAttribute()
     {
         this.contentP.style.color = this.getAttribute('color') || "#2c3e50";
     }

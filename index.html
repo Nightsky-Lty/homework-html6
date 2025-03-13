@@ -12,13 +12,14 @@
     <script type="text/javascript" src="WeatherTag.js"></script>
     <script type="text/javascript" src="ProgressBar.js"></script>
     <script type="text/javascript" src="FlipCard.js"></script>
-    <script type="text/javascript" src="ImageZoom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="text/javascript" src="ModelViewer.js"></script>
 </head>
 
 <body>
 
     <div style="margin-top: 10px; margin-bottom: 10px;">
-        <progress-bar></progress-bar>
+        <progress-bar color="#66ccff"></progress-bar>
     </div>
 
     <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>
@@ -57,7 +58,7 @@
 
 
     <div style="margin-top: 10px; margin-bottom: 10px;">
-        <flip-card style="width: 200px; height: 300px;">
+        <flip-card width="200" height="300">
             <div slot="front">前端</div>
             <div slot="back">后端</div>
         </flip-card>
@@ -65,9 +66,7 @@
     <div style="border-bottom: 2px solid #000; margin-bottom: 20px;"></div>    
 
     <div style="margin-top: 10px; margin-bottom: 10px;">
-        <image-zoom src="test.png">
-            <img src="test.png" alt="Zoomable Image">
-        </image-zoom>
+        <model-viewer width="600" height="400" shape="cube" color="0x87cefa">model</model-viewer>
     </div>
 </body>
 

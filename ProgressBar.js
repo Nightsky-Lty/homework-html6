@@ -31,10 +31,24 @@ class ProgressBar extends HTMLElement
         `;
     }
 
+    static get observedAttributes()
+    {
+        return ['color'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue)
+    {
+        if (name === 'color')
+        {
+            this.updateColor(newValue);
+        }
+    }
+
     connectedCallback()
     {
         window.addEventListener('scroll', this.updateProgress.bind(this));
         this.updateProgress();
+        this.updateColor(this.getAttribute('color'));
     }
 
     disconnectedCallback()
@@ -51,6 +65,12 @@ class ProgressBar extends HTMLElement
         const progressBar = this.shadowRoot.querySelector('.progress-bar');
         progressBar.style.width = `${percentage}%`;
         progressBar.textContent = `${Math.round(percentage)}%`;
+    }
+
+    updateColor(color)
+    {
+        const progressBar = this.shadowRoot.querySelector('.progress-bar');
+        progressBar.style.backgroundColor = color || '#4caf50';
     }
 }
 
